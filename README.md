@@ -10,7 +10,7 @@ The reason for me to choose Python is to be able to plot the problems and the so
 List of possible methods.
 
  * Solutions of Nonlinear Equations
-    * Iteration Method
+    * Graphical (?) Method
     * Bisection Method
     * Regula Falsi Method
     * Newton-Raphson Method
