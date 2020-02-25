@@ -15,7 +15,7 @@ List of possible methods.
     * Regula Falsi Method
     * Newton-Raphson Method
     * Secant Method
-    * Jacobi Iteration Method (After Numerical Derivation)
+    * ------- Jacobi Iteration Method ------- Couldn't do it
  * Solutions of Linear Systems
     * Gaussian Elimination
     * LU Factorizations
