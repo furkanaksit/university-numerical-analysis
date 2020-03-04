@@ -26,3 +26,9 @@ List of possible methods.
  * Interpolation
  * Numerical Derivation
  * Numerical Integral
+
+---
+* Inverse of a Matrix
+* Determinant of a Matrix
+* Adjacent Matrix
+* cofactor Matrix
