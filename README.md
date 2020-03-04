@@ -17,6 +17,7 @@ List of possible methods.
     * Secant Method
     * ------- Jacobi Iteration Method ------- Couldn't do it
  * Solutions of Linear Systems
+    * Cramer's Method
     * Gaussian Elimination
     * LU Factorizations
     * Iterative Solutions
@@ -28,7 +29,7 @@ List of possible methods.
  * Numerical Integral
 
 ---
-* Inverse of a Matrix
+* Inverse of a Matrix - Gauss-Jordan Method
 * Determinant of a Matrix
 * Adjacent Matrix
 * cofactor Matrix
