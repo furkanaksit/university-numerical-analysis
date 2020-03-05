@@ -32,4 +32,5 @@ List of possible methods.
 * Inverse of a Matrix - Gauss-Jordan Method
 * Determinant of a Matrix
 * Adjacent Matrix
-* cofactor Matrix
+* Cofactor Matrix
+* Transpose of a Matrix
