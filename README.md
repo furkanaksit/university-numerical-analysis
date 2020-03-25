@@ -26,7 +26,13 @@ List of possible methods.
       * Gauss-Seidel Iteration
  * Interpolation
  * Numerical Derivation
+   * Forward Differences
+   * Backward Differences
+   * Central Differences
+   * Taylor's Method (Higher Degree Derivatives)
  * Numerical Integral
+   * Trapezoid
+   * Simpson
 
 ---
 * Inverse of a Matrix - Gauss-Jordan Method
