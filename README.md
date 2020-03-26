@@ -20,7 +20,6 @@ List of possible methods.
     * Cramer's Method
     * Gaussian Elimination
     * Iterative Solutions
-      * Richardson Iteration
       * Jacobi Iteration
       * Gauss-Seidel Iteration
  * Interpolation
