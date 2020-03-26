@@ -9,7 +9,7 @@ import time
 import numpy as np
 
 
-function = "x^3-6.5x^3+13.5x+9"
+function = "x^2-1x+(-5)"
 
 def func(x, function):
     pattern = "(?P<c1>[+-]? *\d+(?:\.\d+)?)? *\*? *[xX] *(?:\^ *(?P<e1>-? *\d+(?:\.\d+)?)|(?P<e2>-? *\d+(?:\.\d+)?)?)|(?P<c2>[+-]? *\d+(?:\.\d+)?)"
@@ -32,9 +32,51 @@ def func(x, function):
             #print(f"{result[i+4]}={float(result[i+4])}")
             sum += float(result[i+4])
     return sum
-
 func(1,function)
+def derivative_of_function(point, function, sensitivity, choice=0, degree=1):
+    if choice == 0:
+        # central derivation
+        return (func((point+sensitivity),function) - func((point-sensitivity),function)) / (sensitivity*2)
+    elif choice == -1:
+        # backward derivation
+        return (func((point),function) - func((point-sensitivity),function)) / (sensitivity)
+    elif choice == 1:
+        # forward derivation
+        return (func((point+sensitivity),function) - func((point),function)) / (sensitivity)
+    elif choice == 2:
+        # taylor's series 
+        return 0
 
+def integral_of_function(left, right, function, sensitivity, choice=0):
+    def alternate(size):
+        alter = np.ones(size)
+        for i in range(1,size-1):
+            if i % 2 == 0:
+                alter[i] = 2
+            else:
+                alter[i] = 4
+        return alter
+    if choice == 0:
+        # trapezoid
+        summary = 0
+        for x in np.arange(left + sensitivity, right, sensitivity):
+            summary += func(x,function)
+        summary += (func(left,function) + func(right,function))/2
+        print(summary*sensitivity)
+        return summary*sensitivity
+    elif choice == 1:
+        # simpson rule
+        summary = 0
+        spacing = np.arange(left + sensitivity, right, sensitivity)
+        alter = alternate(spacing.size)
+        for x,y in zip(alter,spacing):
+            summary += x*func(y,function)
+        summary = summary*sensitivity/3
+        return summary
+    
+func(2,"x^3")
+integral_of_function(0,3,"x^2",0.0001,1)    
+    
 def graphical(function, start_value=0, delta_value=0.25, error_rate=0.02):
     start_time = time.time()
     step = 0
@@ -143,9 +185,70 @@ def regula_falsi(function, left_bracket=0, right_bracket=1, error_rate=0.001):
         print("found the root")
         print("--------------------------------------------------------")
         return mid, total_time, step
+
+
+
+def newton_raphson(function, start_value=0, error_rate=0.01):
+    def next_value(x_cur):
+        x_next = x_cur - (func(x_cur,function) / derivative_of_function(x_cur,function,0.000001))
+        print(f"{x_next} <-- {x_cur} - ({func(x_cur,function)} / {derivative_of_function(x_cur,function,0.000001)})")
+        return x_next
+    start_time = time.time()
+    step = 0
+    x_cur = start_value
+    x_next = next_value(x_cur)
+    cntrl = x_next - 5
+    while(abs(x_next - cntrl) > error_rate):
+        x_next = next_value(x_cur)
+        cntrl = x_cur 
+        x_cur = x_next
+        step += 1
+    end_time = time.time()
+    total_time = end_time - start_time
+            
+    return x_next, total_time, step
+
+def secant(function, first_value=1,second_value=2, error_rate=0.00001):
+    def next_value(function, x_cur, x_prev):
+        x_next = x_cur - (func(x_cur,function)*(x_cur-x_prev))/(func(x_cur,function)-func(x_prev,function))
+        print(f"{x_next} <-- {x_cur} - ({func(x_cur,function)}*{(x_cur-x_prev)}) / ({func(x_cur,function)}-{func(x_prev,function)})")
+        return x_next
+    start_time = time.time()
+    step = 0
     
+    x_prev = first_value
+    x_cur = second_value
+    
+    x_next = next_value(function, x_cur ,x_prev)
+    x_prev = x_cur
+    x_cur = x_next
+
+    
+    while((abs(x_next - next_value(function,x_cur,x_prev)) > error_rate)):
+        x_next = next_value(function,x_cur,x_prev)
+        x_prev = x_cur
+        x_cur = x_next
+        step += 1
+    end_time = time.time()
+    total_time = end_time - start_time
+            
+    return x_next, total_time, step
 
 
+
+
+
+#%%
+print("Newton-Raphson Method")
+print("/////////////////////////////////////////////////////////////")
+print()
+print(newton_raphson("x^2-6x+5", start_value=1.5,error_rate=0.0000000001))
+print()  
+print("Secant Method")
+print("/////////////////////////////////////////////////////////////")
+print()
+print(secant("x^4-1x+(-10)", first_value=1.0, second_value=2.0 , error_rate=0.0000000001))
+print()  
 print("Graphical Method")
 print("/////////////////////////////////////////////////////////////")
 print()
