@@ -19,7 +19,6 @@ List of possible methods.
  * Solutions of Linear Systems
     * Cramer's Method
     * Gaussian Elimination
-    * LU Factorizations - Cholesky Method
     * Iterative Solutions
       * Richardson Iteration
       * Jacobi Iteration
