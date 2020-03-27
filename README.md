@@ -42,5 +42,5 @@ Matrix Class
 
 
 ----
-Update: Still missing interpolation, regression, taylor series to calculate higher degree derivatives and parser to parse from function form to matrix form for solving linear equations
-Update2: func method to calculate the value of a function has some problems with parser. it needs some further developement, better regex pattern
+ Update: Project is missing interpolation, regression, taylor series to calculate higher degree derivatives and parser to parse from function form to matrix form for solving linear equations
+ Update2: func method to calculate the value of a function has some problems with parser. it needs further developement, better regex pattern and a simple UI 
