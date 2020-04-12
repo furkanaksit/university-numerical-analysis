@@ -23,6 +23,10 @@ List of possible methods.
       * Jacobi Iteration
       * Gauss-Seidel Iteration
  * Interpolation
+   * Vandermonde Interpolation
+   * Lagrange Interpolation
+ * Regression
+   * Linear Regression
  * Numerical Derivation
    * Forward Differences
    * Backward Differences
