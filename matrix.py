@@ -7,6 +7,7 @@ Created on Wed Mar  4 14:35:07 2020
 """
 
 import numpy as np
+import pandas as pd
 
 class matrix:
     
@@ -182,23 +183,87 @@ def gauss_seidel(mat,res):
             x[i] = (res[i] -(tmp[i]@x))/diagonalley[i]        
         step += 1
     return x
+
+
+
+# for the vandermonde matrix you should give an input lists of x and y values
+degree = 2
+x = [0, 1, 0.6666666]
+y = [1, 0, 0.5]
+
+
+
+
+class vandermonde_interpolation:
+    def __init__(self, x, y, degree):
+        self.inputs = x
+        self.outputs = y
+        self.degree = degree
+        self.vandermonde_matrix = self.make_vandermonde()
+        self.coefficients = self.calculate_coefficients()
+        
     
+    def make_vandermonde(self):
+        vandermonde_matrix = []
+        for i in range(self.degree + 1):
+            temp_list = []
+            for j in range(self.degree + 1):
+                temp_list.append(self.inputs[i]**j)
+            vandermonde_matrix.append(temp_list)
+        return vandermonde_matrix
+    
+    def calculate_coefficients(self):
+        coefficients = gaussian_elimination(self.vandermonde_matrix, self.outputs)
+        return coefficients
+    
+    def interpolate(self, coefficients, x):
+        y = 0
+        for i in range(len(coefficients)):
+            y += coefficients[i]*(x**i)
+        return y
 
 
+def lagrange_approximation(value, inputs, outputs):
+    degree = len(inputs)-1
+    total = 0
+    for i in range(degree + 1):
+        mul = 1
+        for j in range(degree + 1):
+            if(j != i):
+                mul = mul * ((value - inputs[j]) / (inputs[i] - inputs[j]))
+        total += mul*outputs[i]
+    return total
+    
+    
+x = [ 2, 2.75, 4]   
+y = [0.5, 0.36363636363636365, 0.25]
+
+lagrange_approximation(3,x,y)    
 
 
+inputs = np.array([65,65,62,67,69,65,61,67])
+outputs = np.array([105,125,110,120,140,135,95,130])
 
+class linear_regression:
+    def __init__(self,inputs, outputs):
+        self.coefficients = self.make_line(inputs,outputs)
+        
+        
+    def make_line(self, inputs,outputs):
+        sumx_sumy = np.sum(inputs)*np.sum(outputs)
+        sum_xy = np.sum(np.multiply(inputs,outputs))
+        sum_x2 = np.sum(inputs**2)
+        sumx_2 = np.sum(inputs)**2
+        
+        b1 = (sum_xy - (sumx_sumy/len(inputs))) / (sum_x2 - (sumx_2/len(inputs)))
+        b0 = (np.sum(outputs)/len(outputs)) - b1*(np.sum(inputs)/len(inputs))
+        print(f"y = {b1}x + {b0}")
+        return np.array([b0,b1])
+    
+    def calculate(self, value, coefficients):
+        return (coefficients[1]*value) + coefficients[0]
 
-
-
-
-
-
-
-
-
-
-
+x = linear_regression(inputs, outputs)
 
 
 
