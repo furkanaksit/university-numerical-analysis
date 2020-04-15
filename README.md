@@ -40,7 +40,7 @@ List of possible methods.
 Matrix Class 
 * Inverse of a Matrix - Gauss-Jordan Method
 * Determinant of a Matrix
-* Adjacent Matrix
+* Adjoint Matrix
 * Cofactor Matrix
 * Transpose of a Matrix
 
