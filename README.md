@@ -31,7 +31,7 @@ List of possible methods.
    * Forward Differences
    * Backward Differences
    * Central Differences
-   * Taylor's Method (Higher Degree Derivatives)
+   * Taylor's Method (Higher Degree Derivatives) (missing)
  * Numerical Integral
    * Trapezoid
    * Simpson
